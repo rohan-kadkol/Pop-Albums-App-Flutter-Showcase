@@ -14,6 +14,7 @@ class Home extends StatelessWidget {
       // ),
       backgroundColor: Colors.black,
       body: PageView(
+        physics: const BouncingScrollPhysics(),
         // children: albums.map(album => AlbumSection(album: album)).toList(),
         children: [
           AlbumSection(album: albums[0]),
@@ -35,6 +36,7 @@ class AlbumSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
