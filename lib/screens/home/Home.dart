@@ -13,13 +13,82 @@ class Home extends StatelessWidget {
       //   backgroundColor: Colors.black,
       // ),
       backgroundColor: Colors.black,
-      body: PageView(
-        physics: const BouncingScrollPhysics(),
-        // children: albums.map(album => AlbumSection(album: album)).toList(),
+      body: Column(
         children: [
-          AlbumSection(album: albums[0]),
-          AlbumSection(album: albums[1]),
+          Expanded(
+            child: PageView(
+              physics: const BouncingScrollPhysics(),
+              // children: albums.map(album => AlbumSection(album: album)).toList(),
+              children: [
+                AlbumSection(album: albums[0]),
+                AlbumSection(album: albums[1]),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 8,
+                ),
+              ],
+              // border: Border(
+              //   top: BorderSide(
+              //     width: 1,
+              //     color: Colors.grey.shade900,
+              //   ),
+              // ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                button(
+                  icon: Icons.skip_previous,
+                  backgroundColor: Colors.black,
+                  iconColor: Colors.white,
+                ),
+                const SizedBox(width: 10),
+                button(
+                  icon: Icons.play_arrow,
+                  backgroundColor: Colors.white,
+                  iconColor: Colors.black,
+                ),
+                const SizedBox(width: 10),
+                button(
+                  icon: Icons.skip_next,
+                  backgroundColor: Colors.black,
+                  iconColor: Colors.white,
+                ),
+              ],
+            ),
+          )
         ],
+      ),
+    );
+  }
+
+  Widget button({
+    required IconData icon,
+    required Color backgroundColor,
+    required Color iconColor,
+  }) {
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(shape: BoxShape.circle),
+      clipBehavior: Clip.antiAlias,
+      child: Material(
+        color: backgroundColor,
+        child: InkWell(
+          onTap: () => null,
+          child: Icon(
+            icon,
+            color: iconColor,
+          ),
+        ),
       ),
     );
   }
