@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
               color: Colors.black,
               boxShadow: [
@@ -42,31 +42,59 @@ class Home extends StatelessWidget {
               //   ),
               // ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                button(
-                  icon: Icons.skip_previous,
-                  backgroundColor: Colors.black,
-                  iconColor: Colors.white,
-                ),
-                const SizedBox(width: 10),
-                button(
-                  icon: Icons.play_arrow,
-                  backgroundColor: Colors.white,
-                  iconColor: Colors.black,
-                ),
-                const SizedBox(width: 10),
-                button(
-                  icon: Icons.skip_next,
-                  backgroundColor: Colors.black,
-                  iconColor: Colors.white,
-                ),
-              ],
-            ),
+            child: playBar(),
           )
         ],
       ),
+    );
+  }
+
+  Widget playBar() {
+    return Row(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        button(
+          icon: Icons.skip_previous,
+          backgroundColor: Colors.black,
+          iconColor: Colors.white,
+        ),
+        const SizedBox(width: 4),
+        button(
+          icon: Icons.play_arrow,
+          backgroundColor: Colors.white,
+          iconColor: Colors.black,
+        ),
+        const SizedBox(width: 4),
+        button(
+          icon: Icons.skip_next,
+          backgroundColor: Colors.black,
+          iconColor: Colors.white,
+        ),
+        const SizedBox(width: 16),
+        Container(
+          height: 42,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+          clipBehavior: Clip.antiAlias,
+          child: Image.asset(
+            'assets/taylor_swift_midnights.webp',
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Lavender Haze'),
+              Text(
+                'Midnights ∙ Taylor Swift',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 
