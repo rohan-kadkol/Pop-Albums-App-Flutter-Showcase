@@ -18,17 +18,7 @@ class Home extends StatelessWidget {
       // TODO (3): Add BottomBar() to Stack
       // TODO (4): Wrap BottomBar() with Align.alignment = bottomCenter
 
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: albumSectionPages(context),
-          ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomBar(),
-          )
-        ],
-      ),
+      body: albumSectionPages(context),
     );
   }
 
