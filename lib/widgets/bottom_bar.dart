@@ -16,7 +16,13 @@ class BottomBar extends StatelessWidget {
     Track? currentlyPlayingTrack = musicProvider.currentlyPlayingTrack;
     double thumbPosition = musicProvider.thumbPosition;
 
-    return const SizedBox();
+    // TODO (5): Return bottomBarContent
+
+    return bottomBarContent(
+      context: context,
+      musicProvider: musicProvider,
+      color: Colors.black,
+    );
   }
 
   Widget scrubberSlider(
@@ -46,7 +52,48 @@ class BottomBar extends StatelessWidget {
       {required BuildContext context,
       required MusicProvider musicProvider,
       required Color? color}) {
-    return Container();
+    // TODO (6): Container with padding vertical = 16
+    // TODO (7): Container.height = 120 (temporarily)
+    // TODO (8): Container.borderRadius = 20
+    // TODO (9): Container.border = Border.all( width = 1, color =  Colors.grey.shade900)
+    // TODO (10): Container.child = Row
+    // TODO (11): Row.children = [...buttons(), spacing = 4, albumArt, spacing = 12, Expanded(trackAlbumArtistName)]
+    // TODO (12): Add .frosted() to Container
+    // TODO (13): frostColor: Color.alphaBlend(Colors.blueGrey.shade900.withOpacity(0.85),color ?? Colors.blueGrey.shade900,),
+    // TODO (14): frostOpacity: 0.2,
+    // TODO (15): blur: 3,
+    // TODO (16): borderRadius = 10
+
+    return Container(
+      height: 120,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          width: 1,
+          color: Colors.grey.shade900,
+        ),
+      ),
+      child: Row(
+        children: [
+          ...buttons(context: context, musicProvider: musicProvider),
+          const SizedBox(width: 4),
+          albumArt(musicProvider),
+          const SizedBox(width: 12),
+          Expanded(
+            child: trackAlbumArtistName(musicProvider),
+          )
+        ],
+      ),
+    ).frosted(
+      frostColor: Color.alphaBlend(
+        Colors.blueGrey.shade900.withOpacity(0.85),
+        color ?? Colors.blueGrey.shade900,
+      ),
+      frostOpacity: 0.2,
+      blur: 3,
+      borderRadius: BorderRadius.circular(10),
+    );
   }
 
   Widget trackAlbumArtistName(MusicProvider musicProvider) {
