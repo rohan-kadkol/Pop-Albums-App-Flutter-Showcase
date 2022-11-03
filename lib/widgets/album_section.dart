@@ -38,8 +38,6 @@ class AlbumSection extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            // TODO (2): Style with headline 4 and color white
-            // TODO (3): textAlign = center
             Text(
               album.title,
               style: Theme.of(context)
@@ -48,8 +46,6 @@ class AlbumSection extends StatelessWidget {
                   ?.copyWith(color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            // TODO (4): Style with headline 6 and color grey
-            // TODO (5): textAlign = center
             Text(
               album.artistName,
               style: Theme.of(context).textTheme.headline6?.copyWith(
