@@ -14,88 +14,19 @@ class AlbumSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          header(context),
-          const SizedBox(height: 30),
-          trackList(context),
-          const SizedBox(height: 140),
-        ],
-      ),
-    );
+    return const SizedBox();
   }
 
   Widget trackList(BuildContext context) {
     return Column(
-      children: album.tracks
-          .map(
-            (track) => TrackCard(
-              album: album,
-              track: track,
-              onTap: () {
-                context
-                    .read<MusicProvider>()
-                    .startListeningToTrack(album, track);
-              },
-            ),
-          )
-          .toList(),
+      children: [],
     );
   }
 
   Widget header(BuildContext context) {
     return SizedBox(
       height: 300,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              album.cover,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.red,
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(1),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  album.title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4
-                      ?.copyWith(color: Colors.white),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  album.artistName,
-                  style: Theme.of(context).textTheme.headline6?.copyWith(
-                        color: Colors.grey,
-                      ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+      child: const SizedBox(),
     );
   }
 }

@@ -10,28 +10,10 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: albumSectionPages(context),
-          ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomBar(),
-          )
-        ],
-      ),
-    );
+    return const Scaffold();
   }
 
   Widget albumSectionPages(BuildContext context) {
-    return PageView(
-      physics: const BouncingScrollPhysics(),
-      onPageChanged: (i) =>
-          context.read<MusicProvider>().selectedAlbum = albums[i],
-      children: albums.map((album) => AlbumSection(album: album)).toList(),
-    );
+    return const SizedBox();
   }
 }
