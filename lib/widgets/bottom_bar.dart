@@ -16,12 +16,6 @@ class BottomBar extends StatelessWidget {
     Track? currentlyPlayingTrack = musicProvider.currentlyPlayingTrack;
     double thumbPosition = musicProvider.thumbPosition;
 
-    // TODO (7): Wrap bottomBarContent in a Stack
-    // TODO (8): Stack.clip = none
-    // TODO (9): Wrap Stack in Padding horizontal = 20, vertical = 10
-    // TODO (10): Add scrubberSlider
-    // TODO (11): Wrap scrubberSlider with Positioned(top: -10, left: -16, right: -16,)
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Stack(
@@ -50,13 +44,6 @@ class BottomBar extends StatelessWidget {
     double thumbPosition,
     BuildContext context,
   ) {
-    // TODO (1): Return SizedBox(height = 20)
-    // TODO (2): SizedBox.child = Slider
-    // TODO (3): Slider.value = MusicProvider.thumbPosition
-    // TODO (4): Slider.onChanged = MusicProvider.updateThumbPosition(v)
-    // TODO (5): Slider.onChangedStart = pause
-    // TODO (6): Slider.onChangedEnd = play
-
     return SizedBox(
       height: 20,
       child: Slider(
