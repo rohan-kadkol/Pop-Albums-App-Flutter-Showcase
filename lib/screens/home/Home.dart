@@ -2,8 +2,11 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pop_music_concerts/data/album.dart';
 import 'package:pop_music_concerts/data/music.dart';
+import 'package:pop_music_concerts/providers/music_provider.dart';
 import 'package:pop_music_concerts/widgets/album_section.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,10 +17,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   double value = 0.6;
-  int selectedAlbumIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    MusicProvider provider = context.watch<MusicProvider>();
+    Album selectedAlbum = provider.selectedAlbum;
+
+    print('BUILT ${selectedAlbum.title}');
+
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('Taylor Swift'),
@@ -29,12 +36,10 @@ class _HomeState extends State<Home> {
           Positioned.fill(
             child: PageView(
               physics: const BouncingScrollPhysics(),
-              onPageChanged: (i) => setState(() => selectedAlbumIndex = i),
-              // children: albums.map(album => AlbumSection(album: album)).toList(),
-              children: [
-                AlbumSection(album: albums[0]),
-                AlbumSection(album: albums[1]),
-              ],
+              onPageChanged: (i) => setState(() =>
+                  context.read<MusicProvider>().selectedAlbum = albums[i]),
+              children:
+                  albums.map((album) => AlbumSection(album: album)).toList(),
             ),
           ),
           Align(
@@ -44,7 +49,7 @@ class _HomeState extends State<Home> {
               duration: const Duration(milliseconds: 300),
               tween: ColorTween(
                 begin: albums[0].color,
-                end: albums[selectedAlbumIndex].color,
+                end: selectedAlbum.color,
               ),
               builder: (context, color, child) {
                 return Padding(
