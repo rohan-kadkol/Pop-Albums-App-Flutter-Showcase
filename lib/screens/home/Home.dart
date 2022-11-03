@@ -1,3 +1,4 @@
+import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,9 +14,9 @@ class Home extends StatelessWidget {
       //   backgroundColor: Colors.black,
       // ),
       backgroundColor: Colors.black,
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
+          Positioned.fill(
             child: PageView(
               physics: const BouncingScrollPhysics(),
               // children: albums.map(album => AlbumSection(album: album)).toList(),
@@ -25,24 +26,39 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 8,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  // color: Colors.black.withOpacity(0.6),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.grey,
+                  //     blurRadius: 8,
+                  //   ),
+                  // ],
+                  // border: Border(
+                  //   top: BorderSide(
+                  //     width: 1,
+                  //     color: Colors.grey.shade900,
+                  //   ),
+                  // ),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey.shade900,
+                  ),
                 ),
-              ],
-              // border: Border(
-              //   top: BorderSide(
-              //     width: 1,
-              //     color: Colors.grey.shade900,
-              //   ),
-              // ),
+                child: playBar(),
+              ).frosted(
+                frostColor: Colors.blueGrey.shade900,
+                frostOpacity: 0.0,
+                blur: 2,
+              ),
             ),
-            child: playBar(),
           )
         ],
       ),
@@ -55,7 +71,7 @@ class Home extends StatelessWidget {
       children: [
         button(
           icon: Icons.skip_previous,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.transparent,
           iconColor: Colors.white,
         ),
         const SizedBox(width: 4),
@@ -67,7 +83,7 @@ class Home extends StatelessWidget {
         const SizedBox(width: 4),
         button(
           icon: Icons.skip_next,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.transparent,
           iconColor: Colors.white,
         ),
         const SizedBox(width: 16),
@@ -83,6 +99,7 @@ class Home extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text('Lavender Haze'),
               Text(
