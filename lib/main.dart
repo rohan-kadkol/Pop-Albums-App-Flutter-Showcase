@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pop_music_concerts/providers/music_provider.dart';
-import 'package:pop_music_concerts/screens/home/Home.dart';
+import 'package:pop_music_concerts/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
 void main() {
