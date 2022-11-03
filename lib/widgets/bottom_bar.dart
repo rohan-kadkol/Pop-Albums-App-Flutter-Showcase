@@ -49,22 +49,7 @@ class BottomBar extends StatelessWidget {
       // TODO (7): Container.decoration.shape = circle
       // TODO (8): Contianer.clipBehavior = antiAlias
 
-      return Container(
-        width: 36,
-        height: 36,
-        decoration: const BoxDecoration(shape: BoxShape.circle),
-        clipBehavior: Clip.antiAlias,
-        child: Material(
-          color: backgroundColor,
-          child: InkWell(
-            onTap: onTap,
-            child: Icon(
-              icon,
-              color: iconColor,
-            ),
-          ),
-        ),
-      );
+      return const SizedBox();
     }
 
     return [
@@ -151,28 +136,7 @@ class BottomBar extends StatelessWidget {
     // TODO (15): Both TextScrolls, pauseBetween: const Duration(milliseconds: 2000),
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        TextScroll(
-          musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
-          mode: TextScrollMode.bouncing,
-          velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
-          pauseBetween: const Duration(milliseconds: 2000),
-        ),
-        TextScroll(
-          musicProvider.currentlyPlayingTrack != null
-              ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}'
-              : '',
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 14,
-          ),
-          mode: TextScrollMode.bouncing,
-          velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
-          pauseBetween: const Duration(milliseconds: 2000),
-        ),
-      ],
+      children: [],
     );
   }
 
@@ -183,17 +147,6 @@ class BottomBar extends StatelessWidget {
     // TODO (19): Container.clipBehavior = antiAlias
     // TODO (20): Container.child = If track is playing, musicProvider.currentlyPlayingAlbum.cover, else Icon(Icons.music_off)
 
-    return Container(
-      width: 42,
-      height: 42,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
-      clipBehavior: Clip.antiAlias,
-      child: musicProvider.currentlyPlayingTrack != null
-          ? Image.asset(
-              musicProvider.currentlyPlayingAlbum?.cover ?? '',
-              fit: BoxFit.cover,
-            )
-          : const Icon(Icons.music_off),
-    );
+    return Container();
   }
 }
