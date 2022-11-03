@@ -15,7 +15,9 @@ class AlbumSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO (4): Display header()
-    return const SizedBox();
+    return SizedBox(
+      child: header(context),
+    );
   }
 
   Widget trackList(BuildContext context) {
@@ -28,7 +30,22 @@ class AlbumSection extends StatelessWidget {
     // TODO (5): Display column with album art, album name, and artist name
     return SizedBox(
       height: 300,
-      child: const SizedBox(),
+      child: SizedBox(
+        height: 300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Image.asset(
+                album.cover,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Text(album.title),
+            Text(album.artistName)
+          ],
+        ),
+      ),
     );
   }
 }
