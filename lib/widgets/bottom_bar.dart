@@ -16,10 +16,31 @@ class BottomBar extends StatelessWidget {
     Track? currentlyPlayingTrack = musicProvider.currentlyPlayingTrack;
     double thumbPosition = musicProvider.thumbPosition;
 
-    return bottomBarContent(
-      context: context,
-      musicProvider: musicProvider,
-      color: Colors.black,
+    // TODO (7): Wrap bottomBarContent in a Stack
+    // TODO (8): Stack.clip = none
+    // TODO (9): Wrap Stack in Padding horizontal = 20, vertical = 10
+    // TODO (10): Add scrubberSlider
+    // TODO (11): Wrap scrubberSlider with Positioned(top: -10, left: -16, right: -16,)
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          bottomBarContent(
+            context: context,
+            musicProvider: musicProvider,
+            color: Colors.black,
+          ),
+          Positioned(
+            top: -10,
+            left: -16,
+            right: -16,
+            child: scrubberSlider(
+                Colors.blue, currentlyPlayingTrack, thumbPosition, context),
+          ),
+        ],
+      ),
     );
   }
 
@@ -29,7 +50,27 @@ class BottomBar extends StatelessWidget {
     double thumbPosition,
     BuildContext context,
   ) {
-    return const SizedBox();
+    // TODO (1): Return SizedBox(height = 20)
+    // TODO (2): SizedBox.child = Slider
+    // TODO (3): Slider.value = MusicProvider.thumbPosition
+    // TODO (4): Slider.onChanged = MusicProvider.updateThumbPosition(v)
+    // TODO (5): Slider.onChangedStart = pause
+    // TODO (6): Slider.onChangedEnd = play
+
+    return SizedBox(
+      height: 20,
+      child: Slider(
+        activeColor: color,
+        value: currentlyPlayingTrack != null ? thumbPosition : 0,
+        onChanged: (v) => context.read<MusicProvider>().updateThumbPosition(v),
+        onChangeStart: (value) {
+          context.read<MusicProvider>().updateIsPlaying(false);
+        },
+        onChangeEnd: (value) {
+          context.read<MusicProvider>().updateIsPlaying(true);
+        },
+      ),
+    );
   }
 
   List<Widget> buttons(
