@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Add AlbumSection to a column under Scaffold
+    // TODO (3): Add AlbumSection to a column under Scaffold
     return const Scaffold();
   }
 

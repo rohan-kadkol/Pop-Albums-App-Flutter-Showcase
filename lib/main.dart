@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        // TODO: Change themeMode to ThemeMode.dark
-        // TODO: Add darkTheme with ThemeData with Brightness.dark
+        // TODO (1): Change themeMode to ThemeMode.dark
+        // TODO (2): Add darkTheme with ThemeData with Brightness.dark
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
