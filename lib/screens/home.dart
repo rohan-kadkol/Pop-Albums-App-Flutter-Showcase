@@ -12,12 +12,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
-      // TODO (1): Put albumSectionPages() in a Stack
-      // TODO (2): Wrap albumSectionPages() with Positioned.fill
-      // TODO (3): Add BottomBar() to Stack
-      // TODO (4): Wrap BottomBar() with Align.alignment = bottomCenter
-
       body: Stack(
         children: [
           Positioned.fill(
