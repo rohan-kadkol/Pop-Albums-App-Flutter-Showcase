@@ -5,4 +5,8 @@ class Track {
 
   const Track(
       {required this.number, required this.name, required this.duration});
+
+  int getDurationSeconds() {
+    return duration.minute * 60 + duration.second;
+  }
 }

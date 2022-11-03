@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pop_music_concerts/data/album.dart';
 import 'package:pop_music_concerts/data/music.dart';
@@ -8,15 +10,27 @@ class MusicProvider extends ChangeNotifier {
   Album? _currentlyPlayingAlbum;
   Track? _currentlyPlayingTrack;
 
-  double _thumbPosition = 0;
+  // double _thumbPosition = 0;
   bool _isPlaying = false;
+
+  Timer? _timer;
+  int _trackSecondsListened = 0;
 
   bool get isPlaying => _isPlaying;
 
-  double get thumbPosition => _thumbPosition;
+  double get thumbPosition =>
+      _trackSecondsListened /
+      (_currentlyPlayingTrack?.getDurationSeconds() ?? double.infinity);
 
-  set thumbPosition(double thumbPosition) {
-    _thumbPosition = thumbPosition;
+  void updateThumbPosition(double thumbPosition) {
+    if (_currentlyPlayingTrack == null) {
+      return;
+    }
+
+    _trackSecondsListened = (thumbPosition.clamp(0, 1) *
+            _currentlyPlayingTrack!.getDurationSeconds())
+        .round();
+
     notifyListeners();
   }
 
@@ -56,9 +70,14 @@ class MusicProvider extends ChangeNotifier {
   }
 
   void startListeningToTrack(Album album, Track track) {
+    if (_currentlyPlayingTrack != null && track == _currentlyPlayingTrack) {
+      return;
+    }
+
     _currentlyPlayingAlbum = album;
     _currentlyPlayingTrack = track;
-    thumbPosition = 0;
+    _trackSecondsListened = 0;
+    _startTimer();
     _isPlaying = true;
     notifyListeners();
   }
@@ -66,13 +85,39 @@ class MusicProvider extends ChangeNotifier {
   void stopListening() {
     _currentlyPlayingAlbum = null;
     _currentlyPlayingTrack = null;
-    thumbPosition = 0;
+    _trackSecondsListened = 0;
     _isPlaying = false;
+    _timer?.cancel();
+    _timer = null;
     notifyListeners();
   }
 
-  void togglePlay() {
-    _isPlaying = !_isPlaying;
+  void updateIsPlaying(bool isPlaying) {
+    _isPlaying = isPlaying;
+    if (_isPlaying) {
+      _startTimer();
+    } else {
+      print('here cancel');
+      _timer?.cancel();
+      _timer = null;
+    }
     notifyListeners();
+  }
+
+  void _startTimer() {
+    _stopTimer();
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      print('here $_trackSecondsListened');
+      if (thumbPosition >= 1 || _currentlyPlayingTrack == null) {
+        stopListening();
+      }
+      _trackSecondsListened++;
+      notifyListeners();
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+    _timer = null;
   }
 }

@@ -77,7 +77,13 @@ class BottomBar extends StatelessWidget {
                     value: currentlyPlayingTrack != null ? thumbPosition : 0,
                     // onChanged: (v) => setState(() => value = v),
                     onChanged: (v) =>
-                        context.read<MusicProvider>().thumbPosition = v,
+                        context.read<MusicProvider>().updateThumbPosition(v),
+                    onChangeStart: (value) {
+                      context.read<MusicProvider>().updateIsPlaying(false);
+                    },
+                    onChangeEnd: (value) {
+                      context.read<MusicProvider>().updateIsPlaying(true);
+                    },
                   ),
                 ),
               ),
@@ -112,7 +118,9 @@ class BottomBar extends StatelessWidget {
               ? Colors.black
               : Colors.grey,
           onTap: musicProvider.currentlyPlayingTrack != null
-              ? () => context.read<MusicProvider>().togglePlay()
+              ? () => context
+                  .read<MusicProvider>()
+                  .updateIsPlaying(!musicProvider.isPlaying)
               : null,
         ),
         button(
