@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:intl/intl.dart';
 import 'package:pop_music_concerts/data/album.dart';
 import 'package:pop_music_concerts/data/track.dart';
 import 'package:pop_music_concerts/providers/music_provider.dart';
 import 'package:provider/provider.dart';
+// import 'intl';
 
 class TrackCard extends StatelessWidget {
   const TrackCard(
@@ -47,7 +49,8 @@ class TrackCard extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
-                Text('${track.duration.minute}:${track.duration.second}'),
+                Text(
+                    '${track.duration.minute}: ${DateFormat("ss").format(track.duration)}'),
               ],
             ),
           ),
