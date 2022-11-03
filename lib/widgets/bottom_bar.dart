@@ -40,15 +40,6 @@ class BottomBar extends StatelessWidget {
       required Color iconColor,
       void Function()? onTap,
     }) {
-      // TODO (1): Return Container
-      // TODO (2): Container width = height = 36
-      // TODO (3): Container.child = Material -> InkWell -> Icon
-      // TODO (4): Material.color = backgroundColor
-      // TODO (5): InkWell.onTap = onTap
-      // TODO (6): Icon.color = iconColor
-      // TODO (7): Container.decoration.shape = circle
-      // TODO (8): Contianer.clipBehavior = antiAlias
-
       return Container(
         width: 36,
         height: 36,
@@ -142,14 +133,6 @@ class BottomBar extends StatelessWidget {
   }
 
   Widget trackAlbumArtistName(MusicProvider musicProvider) {
-    // TODO (9): Column.children = [TextScroll, TextScroll]
-    // TODO (10): TextScroll1.text = musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
-    // TODO (11): TextScroll2.text = musicProvider.currentlyPlayingTrack != null ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}' : '',
-    // TODO (12): TextScroll2.textStyle = fontSize = 15, color = grey
-    // TODO (13): Both TextScrolls, mode: TextScrollMode.bouncing,
-    // TODO (14): Both TextScrolls, velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
-    // TODO (15): Both TextScrolls, pauseBetween: const Duration(milliseconds: 2000),
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -177,12 +160,6 @@ class BottomBar extends StatelessWidget {
   }
 
   Widget albumArt(MusicProvider musicProvider) {
-    // TODO (16): Container
-    // TODO (17): Container.width = height = 42
-    // TODO (18): Container.borderRadius = 6
-    // TODO (19): Container.clipBehavior = antiAlias
-    // TODO (20): Container.child = If track is playing, musicProvider.currentlyPlayingAlbum.cover, else Icon(Icons.music_off)
-
     return Container(
       width: 42,
       height: 42,
