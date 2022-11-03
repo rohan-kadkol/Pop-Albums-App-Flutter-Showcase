@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pop_music_concerts/data/album.dart';
+import 'package:pop_music_concerts/data/track.dart';
 import 'package:pop_music_concerts/providers/music_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:blur/blur.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Album selectedAlbum = context.watch<MusicProvider>().selectedAlbum;
+    MusicProvider musicProvider = context.watch<MusicProvider>();
+    Album selectedAlbum = musicProvider.selectedAlbum;
+    Track? currentlyPlayingTrack = musicProvider.currentlyPlayingTrack;
+    double thumbPosition = musicProvider.thumbPosition;
 
     return TweenAnimationBuilder(
       // curve: Curves.bounceIn,
@@ -28,6 +33,7 @@ class BottomBar extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Container(
+                // height: 110,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
                   // color: Colors.black.withOpacity(0.6),
@@ -49,7 +55,7 @@ class BottomBar extends StatelessWidget {
                     color: Colors.grey.shade900,
                   ),
                 ),
-                child: playBar(),
+                child: playBar(context: context, musicProvider: musicProvider),
               ).frosted(
                 // frostColor: Colors.blueGrey.shade900,
                 frostColor: Color.alphaBlend(
@@ -68,9 +74,10 @@ class BottomBar extends StatelessWidget {
                   height: 20,
                   child: Slider(
                     activeColor: color,
-                    value: 0.6,
+                    value: currentlyPlayingTrack != null ? thumbPosition : 0,
                     // onChanged: (v) => setState(() => value = v),
-                    onChanged: (v) => null,
+                    onChanged: (v) =>
+                        context.read<MusicProvider>().thumbPosition = v,
                   ),
                 ),
               ),
@@ -81,35 +88,55 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Widget playBar() {
+  Widget playBar(
+      {required BuildContext context, required MusicProvider musicProvider}) {
     return Row(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         button(
           icon: Icons.skip_previous,
           backgroundColor: Colors.transparent,
-          iconColor: Colors.white,
+          iconColor: musicProvider.currentlyPlayingTrack != null
+              ? Colors.white
+              : Colors.grey,
+          onTap: musicProvider.currentlyPlayingTrack != null
+              ? () => context.read<MusicProvider>().playPrevTrack()
+              : null,
         ),
-        const SizedBox(width: 4),
         button(
-          icon: Icons.play_arrow,
-          backgroundColor: Colors.white,
-          iconColor: Colors.black,
+          icon: musicProvider.isPlaying ? Icons.pause : Icons.play_arrow,
+          backgroundColor: musicProvider.currentlyPlayingTrack != null
+              ? Colors.white
+              : Colors.grey.shade300,
+          iconColor: musicProvider.currentlyPlayingTrack != null
+              ? Colors.black
+              : Colors.grey,
+          onTap: musicProvider.currentlyPlayingTrack != null
+              ? () => context.read<MusicProvider>().togglePlay()
+              : null,
         ),
-        const SizedBox(width: 4),
         button(
           icon: Icons.skip_next,
           backgroundColor: Colors.transparent,
-          iconColor: Colors.white,
+          iconColor: musicProvider.currentlyPlayingTrack != null
+              ? Colors.white
+              : Colors.grey,
+          onTap: musicProvider.currentlyPlayingTrack != null
+              ? () => context.read<MusicProvider>().playNextTrack()
+              : null,
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 4),
         Container(
+          width: 42,
           height: 42,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
           clipBehavior: Clip.antiAlias,
-          child: Image.asset(
-            'assets/taylor_swift_midnights.webp',
-          ),
+          child: musicProvider.currentlyPlayingTrack != null
+              ? Image.asset(
+                  musicProvider.currentlyPlayingAlbum?.cover ?? '',
+                  fit: BoxFit.cover,
+                )
+              : Icon(Icons.music_off),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -117,12 +144,28 @@ class BottomBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Lavender Haze'),
-              Text(
-                'Midnights ∙ Taylor Swift',
+              TextScroll(
+                musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
+                mode: TextScrollMode.bouncing,
+                velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
+                // delayBefore: Duration(milliseconds: 1500),
+                pauseBetween: Duration(milliseconds: 2000),
+                // maxLines: 1,
+                // overflow: TextOverflow.ellipsis,
+              ),
+              TextScroll(
+                musicProvider.currentlyPlayingTrack != null
+                    ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}'
+                    : '',
                 style: TextStyle(
                   color: Colors.grey,
+                  fontSize: 14,
                 ),
+                // maxLines: 1,
+                mode: TextScrollMode.bouncing,
+                velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
+                // delayBefore: Duration(milliseconds: 1500),
+                pauseBetween: Duration(milliseconds: 2000),
               ),
             ],
           ),
@@ -135,6 +178,7 @@ class BottomBar extends StatelessWidget {
     required IconData icon,
     required Color backgroundColor,
     required Color iconColor,
+    void Function()? onTap,
   }) {
     return Container(
       width: 36,
@@ -144,7 +188,7 @@ class BottomBar extends StatelessWidget {
       child: Material(
         color: backgroundColor,
         child: InkWell(
-          onTap: () => null,
+          onTap: onTap,
           child: Icon(
             icon,
             color: iconColor,

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pop_music_concerts/data/track.dart';
 
 class TrackCard extends StatelessWidget {
-  const TrackCard({super.key, required this.track, required this.onClick});
+  const TrackCard({super.key, required this.track, required this.onTap});
 
   final Track track;
-  final void Function() onClick;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class TrackCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
         color: Colors.black,
         child: InkWell(
-          onTap: () => null,
+          onTap: onTap,
           borderRadius: BorderRadius.circular(6),
           child: Padding(
             padding: const EdgeInsets.all(16),
