@@ -11,6 +11,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO (1): Add black background color
+      backgroundColor: Colors.black,
       body: AlbumSection(
         album: albums[0],
       ),
