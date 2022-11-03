@@ -29,11 +29,6 @@ class AlbumSection extends StatelessWidget {
     return SizedBox(
       height: 300,
       child: SizedBox(
-        // TODO (1): Replace Column with stack
-        // TODO (2): Positioned.fill for Image
-        // TODO (3): Align.alignment = bottomCenter for Column with texts
-        // TODO (4): Add 8 units space between texts in column
-        // TODO (5): Add a linear gradient over the image
         child: Stack(
           children: [
             Positioned.fill(
