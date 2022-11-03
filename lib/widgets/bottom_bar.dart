@@ -22,25 +22,10 @@ class BottomBar extends StatelessWidget {
     // TODO (10): Add scrubberSlider
     // TODO (11): Wrap scrubberSlider with Positioned(top: -10, left: -16, right: -16,)
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          bottomBarContent(
-            context: context,
-            musicProvider: musicProvider,
-            color: Colors.black,
-          ),
-          Positioned(
-            top: -10,
-            left: -16,
-            right: -16,
-            child: scrubberSlider(
-                Colors.blue, currentlyPlayingTrack, thumbPosition, context),
-          ),
-        ],
-      ),
+    return bottomBarContent(
+      context: context,
+      musicProvider: musicProvider,
+      color: Colors.black,
     );
   }
 
@@ -57,20 +42,7 @@ class BottomBar extends StatelessWidget {
     // TODO (5): Slider.onChangedStart = pause
     // TODO (6): Slider.onChangedEnd = play
 
-    return SizedBox(
-      height: 20,
-      child: Slider(
-        activeColor: color,
-        value: currentlyPlayingTrack != null ? thumbPosition : 0,
-        onChanged: (v) => context.read<MusicProvider>().updateThumbPosition(v),
-        onChangeStart: (value) {
-          context.read<MusicProvider>().updateIsPlaying(false);
-        },
-        onChangeEnd: (value) {
-          context.read<MusicProvider>().updateIsPlaying(true);
-        },
-      ),
-    );
+    return const SizedBox();
   }
 
   List<Widget> buttons(
