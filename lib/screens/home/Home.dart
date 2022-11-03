@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   double value = 0.6;
+  int selectedAlbumIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
           Positioned.fill(
             child: PageView(
               physics: const BouncingScrollPhysics(),
+              onPageChanged: (i) => setState(() => selectedAlbumIndex = i),
               // children: albums.map(album => AlbumSection(album: album)).toList(),
               children: [
                 AlbumSection(album: albums[0]),
@@ -35,55 +37,71 @@ class _HomeState extends State<Home> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Stack(
-                // mainAxisSize: MainAxisSize.min,
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      // color: Colors.black.withOpacity(0.6),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.grey,
-                      //     blurRadius: 8,
-                      //   ),
-                      // ],
-                      // border: Border(
-                      //   top: BorderSide(
-                      //     width: 1,
-                      //     color: Colors.grey.shade900,
-                      //   ),
-                      // ),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.grey.shade900,
-                      ),
-                    ),
-                    child: playBar(),
-                  ).frosted(
-                    frostColor: Colors.blueGrey.shade900,
-                    frostOpacity: 0.0,
-                    blur: 2,
-                  ),
-                  Positioned(
-                    top: -10,
-                    left: -16,
-                    right: -16,
-                    child: Container(
-                      // color: Colors.red,
-                      height: 20,
-                      child: Slider(
-                        value: value,
-                        onChanged: (v) => setState(() => value = v),
-                      ),
-                    ),
-                  ),
-                ],
+            child: TweenAnimationBuilder(
+              // curve: Curves.bounceIn,
+              duration: const Duration(milliseconds: 300),
+              tween: ColorTween(
+                begin: albums[0].color,
+                end: albums[selectedAlbumIndex].color,
               ),
+              builder: (context, color, child) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Stack(
+                    // mainAxisSize: MainAxisSize.min,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          // color: Colors.black.withOpacity(0.6),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     color: Colors.grey,
+                          //     blurRadius: 8,
+                          //   ),
+                          // ],
+                          // border: Border(
+                          //   top: BorderSide(
+                          //     width: 1,
+                          //     color: Colors.grey.shade900,
+                          //   ),
+                          // ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.grey.shade900,
+                          ),
+                        ),
+                        child: playBar(),
+                      ).frosted(
+                        // frostColor: Colors.blueGrey.shade900,
+                        frostColor: Color.alphaBlend(
+                          Colors.blueGrey.shade900.withOpacity(0.85),
+                          color ?? Colors.blueGrey.shade900,
+                        ),
+                        frostOpacity: 0.2,
+                        blur: 3,
+                      ),
+                      Positioned(
+                        top: -10,
+                        left: -16,
+                        right: -16,
+                        child: Container(
+                          // color: Colors.red,
+                          height: 20,
+                          child: Slider(
+                            activeColor: color,
+                            value: value,
+                            onChanged: (v) => setState(() => value = v),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           )
         ],
@@ -290,12 +308,14 @@ class Album {
   final String cover;
   final String artistName;
   final List<Track> tracks;
+  final Color color;
 
   const Album({
     required this.title,
     required this.cover,
     required this.artistName,
     required this.tracks,
+    required this.color,
   });
 }
 
@@ -313,6 +333,7 @@ final List<Album> albums = [
     title: 'Midnights',
     cover: 'assets/taylor_swift_midnights.webp',
     artistName: 'Taylor Swift',
+    color: Color.fromARGB(255, 72, 72, 184),
     tracks: [
       Track(
         number: 1,
@@ -420,6 +441,7 @@ final List<Album> albums = [
     title: 'Harry \'s House',
     cover: 'assets/harry_styles_harrys_house.webp',
     artistName: 'Harry Styles',
+    color: Color.fromARGB(255, 180, 155, 86),
     tracks: [
       Track(
         number: 1,
