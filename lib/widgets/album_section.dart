@@ -19,99 +19,81 @@ class AlbumSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            height: 300,
-            child: Stack(
+          header(context),
+          const SizedBox(height: 30),
+          trackList(context),
+          const SizedBox(height: 140),
+        ],
+      ),
+    );
+  }
+
+  Widget trackList(BuildContext context) {
+    return Column(
+      children: album.tracks
+          .map(
+            (track) => TrackCard(
+              album: album,
+              track: track,
+              onTap: () {
+                context
+                    .read<MusicProvider>()
+                    .startListeningToTrack(album, track);
+              },
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget header(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              album.cover,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.red,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(1),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Positioned.fill(
-                  child: Image.asset(
-                    album.cover,
-                    fit: BoxFit.cover,
-                  ),
+                Text(
+                  album.title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline4
+                      ?.copyWith(color: Colors.white),
                 ),
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(1),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                const SizedBox(height: 8),
+                Text(
+                  album.artistName,
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                        color: Colors.grey,
                       ),
-                    ),
-                  ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        album.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4
-                            ?.copyWith(color: Colors.white),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        album.artistName,
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              // fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            ),
-                        // style: Theme.of(context).textTheme.,
-                      ),
-                    ],
-                  ),
-                )
               ],
             ),
-          ),
-          // Container(
-          //   height: 300,
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage(
-          //         'assets/taylor_swift_midnights.webp',
-          //       ),
-          //       fit: BoxFit.cover,
-          //       // colorFilter: ColorFilter.mode(
-          //       //     Colors.black.withOpacity(1), BlendMode.darken),
-          //     ),
-          //   ),
-          // )
-          // Container(
-          //   height: 1000,
-          //   decoration: BoxDecoration(color: Colors.black),
-          // ),
-          const SizedBox(height: 30),
-          Container(
-            // color: Colors.red,
-            child: Column(
-              children: album.tracks
-                  .map((track) => TrackCard(
-                        album: album,
-                        track: track,
-                        onTap: () {
-                          context
-                              .read<MusicProvider>()
-                              .startListeningToTrack(album, track);
-                          // context.read<MusicProvider>().currentlyPlayingAlbum =
-                          //     album;
-                          // context.read<MusicProvider>().currentlyPlayingTrack =
-                          //     track;
-                        },
-                      ))
-                  .toList(),
-            ),
-          ),
-          SizedBox(
-            height: 140,
-          ),
+          )
         ],
       ),
     );

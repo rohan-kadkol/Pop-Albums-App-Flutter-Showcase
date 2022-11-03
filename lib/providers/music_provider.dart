@@ -10,7 +10,6 @@ class MusicProvider extends ChangeNotifier {
   Album? _currentlyPlayingAlbum;
   Track? _currentlyPlayingTrack;
 
-  // double _thumbPosition = 0;
   bool _isPlaying = false;
 
   Timer? _timer;
@@ -97,7 +96,6 @@ class MusicProvider extends ChangeNotifier {
     if (_isPlaying) {
       _startTimer();
     } else {
-      print('here cancel');
       _timer?.cancel();
       _timer = null;
     }
@@ -107,7 +105,6 @@ class MusicProvider extends ChangeNotifier {
   void _startTimer() {
     _stopTimer();
     _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-      print('here $_trackSecondsListened');
       if (thumbPosition >= 1 || _currentlyPlayingTrack == null) {
         stopListening();
       }

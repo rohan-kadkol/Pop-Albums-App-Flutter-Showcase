@@ -5,7 +5,6 @@ import 'package:pop_music_concerts/data/album.dart';
 import 'package:pop_music_concerts/data/track.dart';
 import 'package:pop_music_concerts/providers/music_provider.dart';
 import 'package:provider/provider.dart';
-// import 'intl';
 
 class TrackCard extends StatelessWidget {
   const TrackCard(
@@ -41,8 +40,8 @@ class TrackCard extends StatelessWidget {
                 const SizedBox(width: 20),
                 Expanded(child: Text(track.name)),
                 isTrackPlaying && isPlaying
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
                         child: SpinKitWave(
                           color: Colors.white,
                           size: 12.0,
