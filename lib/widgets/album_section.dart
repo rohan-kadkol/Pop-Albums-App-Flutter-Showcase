@@ -40,23 +40,10 @@ class AlbumSection extends StatelessWidget {
             ),
             // TODO (2): Style with headline 4 and color white
             // TODO (3): textAlign = center
-            Text(
-              album.title,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4
-                  ?.copyWith(color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
+            Text(album.title),
             // TODO (4): Style with headline 6 and color grey
             // TODO (5): textAlign = center
-            Text(
-              album.artistName,
-              style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: Colors.grey,
-                  ),
-              textAlign: TextAlign.center,
-            )
+            Text(album.artistName),
           ],
         ),
       ),
