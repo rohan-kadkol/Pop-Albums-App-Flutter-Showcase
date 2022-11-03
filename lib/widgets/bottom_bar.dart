@@ -166,8 +166,6 @@ class BottomBar extends StatelessWidget {
       blur: 3,
       borderRadius: BorderRadius.circular(10),
     );
-
-    // return;
   }
 
   Widget trackAlbumArtistName(MusicProvider musicProvider) {
