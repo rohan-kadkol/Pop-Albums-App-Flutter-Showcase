@@ -164,6 +164,7 @@ class BottomBar extends StatelessWidget {
       ),
       frostOpacity: 0.2,
       blur: 3,
+      borderRadius: BorderRadius.circular(10),
     );
 
     // return;
