@@ -34,44 +34,29 @@ class AlbumSection extends StatelessWidget {
         // TODO (3): Align.alignment = bottomCenter for Column with texts
         // TODO (4): Add 8 units space between texts in column
         // TODO (5): Add a linear gradient over the image
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Positioned.fill(
+            Expanded(
               child: Image.asset(
                 album.cover,
                 fit: BoxFit.cover,
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
+            Text(
+              album.title,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  ?.copyWith(color: Colors.white),
+              textAlign: TextAlign.center,
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    album.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        ?.copyWith(color: Colors.white),
+            Text(
+              album.artistName,
+              style: Theme.of(context).textTheme.headline6?.copyWith(
+                    color: Colors.grey,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    album.artistName,
-                    style: Theme.of(context).textTheme.headline6?.copyWith(
-                          color: Colors.grey,
-                        ),
-                  ),
-                ],
-              ),
+              textAlign: TextAlign.center,
             )
           ],
         ),
