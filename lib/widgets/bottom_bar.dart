@@ -20,34 +20,25 @@ class BottomBar extends StatelessWidget {
     // TODO (2): tween: ColorTween(begin: Colors.blueGrey.shade900,end: selectedAlbum.color,),
     // TODO (3): Replace hardcoded colors with color
 
-    return TweenAnimationBuilder(
-      duration: const Duration(milliseconds: 300),
-      tween: ColorTween(
-        begin: Colors.blueGrey.shade900,
-        end: selectedAlbum.color,
-      ),
-      builder: (context, color, child) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              bottomBarContent(
-                context: context,
-                musicProvider: musicProvider,
-                color: color,
-              ),
-              Positioned(
-                top: -10,
-                left: -16,
-                right: -16,
-                child: scrubberSlider(
-                    color, currentlyPlayingTrack, thumbPosition, context),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          bottomBarContent(
+            context: context,
+            musicProvider: musicProvider,
+            color: Colors.black,
           ),
-        );
-      },
+          Positioned(
+            top: -10,
+            left: -16,
+            right: -16,
+            child: scrubberSlider(
+                Colors.blue, currentlyPlayingTrack, thumbPosition, context),
+          ),
+        ],
+      ),
     );
   }
 
@@ -143,6 +134,7 @@ class BottomBar extends StatelessWidget {
       required Color? color}) {
     return Container(
       // TODO (4): Removed temporary hard coded height
+      height: 120,
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
