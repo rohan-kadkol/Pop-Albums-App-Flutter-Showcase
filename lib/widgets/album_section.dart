@@ -14,6 +14,7 @@ class AlbumSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Display header()
     return const SizedBox();
   }
 
@@ -24,6 +25,7 @@ class AlbumSection extends StatelessWidget {
   }
 
   Widget header(BuildContext context) {
+    // TODO: Display column with album art, album name, and artist name
     return SizedBox(
       height: 300,
       child: const SizedBox(),
