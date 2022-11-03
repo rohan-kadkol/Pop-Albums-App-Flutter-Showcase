@@ -1,16 +1,22 @@
-# pop_music_concerts
+# Pop Music Albums App
 
-A new Flutter project.
+An modern UI app displaying trending pop albums.
 
-## Getting Started
+<img src="screenshots/screenshot.gif" width="300px">
 
-This project is a starting point for a Flutter application.
+This app part of a live coding workshop to showcase how to build a beautiful UI super quickly with Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Workshop will be live on our GDSC LSU [YouTube Channel](https://www.youtube.com/channel/UCJPgY1BxAzFiTyOaGrOhpnw) on **Nov 3, 2022 at 6 PM CT**.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+We hope to see you there!
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Structure
+
+* The app has been divided into steps.
+* Each step has starter and solution code with TODOs.
+* Each step is a separate branch.
+
+### How to code along with this repo/workshop?
+
+* Complete the given TODOs in order.
+* Compare the starter and solution branches for each step. (GitHub, Android Studio/VS Code, etc.)
