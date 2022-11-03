@@ -14,10 +14,6 @@ class AlbumSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO (1): Wrap header with a Column
-    // TODO (2): Add trackList to the Column
-    // TODO (3): Space between header - trackList = 30
-    // TODO (4): Space after trackList = 140
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
@@ -33,9 +29,6 @@ class AlbumSection extends StatelessWidget {
   }
 
   Widget trackList(BuildContext context) {
-    // TODO (5): children = List of TrackCards
-    // TODO (6): onTap = MusicProvider.startListeningToTrack
-
     return Column(
       children: album.tracks
           .map(
