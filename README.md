@@ -20,3 +20,41 @@ We hope to see you there!
 
 * Complete the given TODOs in order.
 * Compare the starter and solution branches for each step. (GitHub, Android Studio/VS Code, etc.)
+
+### Steps
+
+* Step 1
+
+<img src="screenshots/step_1.png" width="300px">
+
+* Step 2
+
+<img src="screenshots/step_2.png" width="300px">
+
+* Step 3
+
+<img src="screenshots/step_3.png" width="300px">
+
+* Step 4
+
+<img src="screenshots/step_4.png" width="300px">
+
+* Step 5
+
+<img src="screenshots/step_5.png" width="300px">
+
+* Step 6
+
+<img src="screenshots/step_6.png" width="300px">
+
+* Step 7
+
+<img src="screenshots/step_7.png" width="300px">
+
+* Step 8
+
+<img src="screenshots/step_8.png" width="300px">
+
+* Step 9
+
+<img src="screenshots/step_9.png" width="300px">
