@@ -13,7 +13,9 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       // TODO (1): Return albumSectionPages()
-      body: albumSectionPages(context),
+      body: AlbumSection(
+        album: albums[0],
+      ),
     );
   }
 
@@ -22,11 +24,6 @@ class Home extends StatelessWidget {
     // TODO (3): PageView.physics = BouncingScrollPhysics()
     // TODO (4): onPageChanged = MusicProvider.selectedAlbum = albums[i]
 
-    return PageView(
-      physics: const BouncingScrollPhysics(),
-      onPageChanged: (i) =>
-          context.read<MusicProvider>().selectedAlbum = albums[i],
-      children: albums.map((album) => AlbumSection(album: album)).toList(),
-    );
+    return const SizedBox();
   }
 }
