@@ -104,7 +104,7 @@ class MusicProvider extends ChangeNotifier {
 
   void _startTimer() {
     _stopTimer();
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       if (thumbPosition >= 1 || _currentlyPlayingTrack == null) {
         stopListening();
       }

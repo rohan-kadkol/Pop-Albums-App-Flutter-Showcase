@@ -179,19 +179,19 @@ class BottomBar extends StatelessWidget {
           musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
           mode: TextScrollMode.bouncing,
           velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
-          pauseBetween: Duration(milliseconds: 2000),
+          pauseBetween: const Duration(milliseconds: 2000),
         ),
         TextScroll(
           musicProvider.currentlyPlayingTrack != null
               ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}'
               : '',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 14,
           ),
           mode: TextScrollMode.bouncing,
           velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
-          pauseBetween: Duration(milliseconds: 2000),
+          pauseBetween: const Duration(milliseconds: 2000),
         ),
       ],
     );
@@ -208,7 +208,7 @@ class BottomBar extends StatelessWidget {
               musicProvider.currentlyPlayingAlbum?.cover ?? '',
               fit: BoxFit.cover,
             )
-          : Icon(Icons.music_off),
+          : const Icon(Icons.music_off),
     );
   }
 }
