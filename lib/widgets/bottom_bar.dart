@@ -28,24 +28,10 @@ class BottomBar extends StatelessWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey.shade900,
-                  ),
-                ),
-                child: bottomBarContent(
-                    context: context, musicProvider: musicProvider),
-              ).frosted(
-                frostColor: Color.alphaBlend(
-                  Colors.blueGrey.shade900.withOpacity(0.85),
-                  color ?? Colors.blueGrey.shade900,
-                ),
-                frostOpacity: 0.2,
-                blur: 3,
+              bottomBarContent(
+                context: context,
+                musicProvider: musicProvider,
+                color: color,
               ),
               Positioned(
                 top: -10,
@@ -148,18 +134,39 @@ class BottomBar extends StatelessWidget {
   }
 
   Widget bottomBarContent(
-      {required BuildContext context, required MusicProvider musicProvider}) {
-    return Row(
-      children: [
-        ...buttons(context: context, musicProvider: musicProvider),
-        const SizedBox(width: 4),
-        albumArt(musicProvider),
-        const SizedBox(width: 12),
-        Expanded(
-          child: trackAlbumArtistName(musicProvider),
-        )
-      ],
+      {required BuildContext context,
+      required MusicProvider musicProvider,
+      required Color? color}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          width: 1,
+          color: Colors.grey.shade900,
+        ),
+      ),
+      child: Row(
+        children: [
+          ...buttons(context: context, musicProvider: musicProvider),
+          const SizedBox(width: 4),
+          albumArt(musicProvider),
+          const SizedBox(width: 12),
+          Expanded(
+            child: trackAlbumArtistName(musicProvider),
+          )
+        ],
+      ),
+    ).frosted(
+      frostColor: Color.alphaBlend(
+        Colors.blueGrey.shade900.withOpacity(0.85),
+        color ?? Colors.blueGrey.shade900,
+      ),
+      frostOpacity: 0.2,
+      blur: 3,
     );
+
+    // return;
   }
 
   Widget trackAlbumArtistName(MusicProvider musicProvider) {
