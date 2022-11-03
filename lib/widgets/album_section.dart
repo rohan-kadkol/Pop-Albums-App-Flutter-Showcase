@@ -94,6 +94,7 @@ class AlbumSection extends StatelessWidget {
             child: Column(
               children: album.tracks
                   .map((track) => TrackCard(
+                        album: album,
                         track: track,
                         onTap: () {
                           context
