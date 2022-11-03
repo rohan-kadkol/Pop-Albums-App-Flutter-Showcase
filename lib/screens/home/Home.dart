@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  double value = 0.6;
 
   @override
   Widget build(BuildContext context) {
@@ -30,33 +37,52 @@ class Home extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  // color: Colors.black.withOpacity(0.6),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.grey,
-                  //     blurRadius: 8,
-                  //   ),
-                  // ],
-                  // border: Border(
-                  //   top: BorderSide(
-                  //     width: 1,
-                  //     color: Colors.grey.shade900,
-                  //   ),
-                  // ),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey.shade900,
+              child: Stack(
+                // mainAxisSize: MainAxisSize.min,
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      // color: Colors.black.withOpacity(0.6),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey,
+                      //     blurRadius: 8,
+                      //   ),
+                      // ],
+                      // border: Border(
+                      //   top: BorderSide(
+                      //     width: 1,
+                      //     color: Colors.grey.shade900,
+                      //   ),
+                      // ),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: Colors.grey.shade900,
+                      ),
+                    ),
+                    child: playBar(),
+                  ).frosted(
+                    frostColor: Colors.blueGrey.shade900,
+                    frostOpacity: 0.0,
+                    blur: 2,
                   ),
-                ),
-                child: playBar(),
-              ).frosted(
-                frostColor: Colors.blueGrey.shade900,
-                frostOpacity: 0.0,
-                blur: 2,
+                  Positioned(
+                    top: -10,
+                    left: -16,
+                    right: -16,
+                    child: Container(
+                      // color: Colors.red,
+                      height: 20,
+                      child: Slider(
+                        value: value,
+                        onChanged: (v) => setState(() => value = v),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           )
