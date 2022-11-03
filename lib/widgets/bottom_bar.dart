@@ -40,10 +40,69 @@ class BottomBar extends StatelessWidget {
       required Color iconColor,
       void Function()? onTap,
     }) {
-      return const SizedBox();
+      // TODO (1): Return Container
+      // TODO (2): Container width = height = 36
+      // TODO (3): Container.child = Material -> InkWell -> Icon
+      // TODO (4): Material.color = backgroundColor
+      // TODO (5): InkWell.onTap = onTap
+      // TODO (6): Icon.color = iconColor
+      // TODO (7): Container.decoration.shape = circle
+      // TODO (8): Contianer.clipBehavior = antiAlias
+
+      return Container(
+        width: 36,
+        height: 36,
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        clipBehavior: Clip.antiAlias,
+        child: Material(
+          color: backgroundColor,
+          child: InkWell(
+            onTap: onTap,
+            child: Icon(
+              icon,
+              color: iconColor,
+            ),
+          ),
+        ),
+      );
     }
 
-    return [];
+    return [
+      button(
+        icon: Icons.skip_previous,
+        backgroundColor: Colors.transparent,
+        iconColor: musicProvider.currentlyPlayingTrack != null
+            ? Colors.white
+            : Colors.grey,
+        onTap: musicProvider.currentlyPlayingTrack != null
+            ? () => context.read<MusicProvider>().playPrevTrack()
+            : null,
+      ),
+      button(
+        icon: musicProvider.isPlaying ? Icons.pause : Icons.play_arrow,
+        backgroundColor: musicProvider.currentlyPlayingTrack != null
+            ? Colors.white
+            : Colors.grey.shade300,
+        iconColor: musicProvider.currentlyPlayingTrack != null
+            ? Colors.black
+            : Colors.grey,
+        onTap: musicProvider.currentlyPlayingTrack != null
+            ? () => context
+                .read<MusicProvider>()
+                .updateIsPlaying(!musicProvider.isPlaying)
+            : null,
+      ),
+      button(
+        icon: Icons.skip_next,
+        backgroundColor: Colors.transparent,
+        iconColor: musicProvider.currentlyPlayingTrack != null
+            ? Colors.white
+            : Colors.grey,
+        onTap: musicProvider.currentlyPlayingTrack != null
+            ? () => context.read<MusicProvider>().playNextTrack()
+            : null,
+      ),
+    ];
   }
 
   Widget bottomBarContent(
@@ -83,12 +142,58 @@ class BottomBar extends StatelessWidget {
   }
 
   Widget trackAlbumArtistName(MusicProvider musicProvider) {
+    // TODO (9): Column.children = [TextScroll, TextScroll]
+    // TODO (10): TextScroll1.text = musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
+    // TODO (11): TextScroll2.text = musicProvider.currentlyPlayingTrack != null ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}' : '',
+    // TODO (12): TextScroll2.textStyle = fontSize = 15, color = grey
+    // TODO (13): Both TextScrolls, mode: TextScrollMode.bouncing,
+    // TODO (14): Both TextScrolls, velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
+    // TODO (15): Both TextScrolls, pauseBetween: const Duration(milliseconds: 2000),
+
     return Column(
-      children: [],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextScroll(
+          musicProvider.currentlyPlayingTrack?.name ?? 'None playing',
+          mode: TextScrollMode.bouncing,
+          velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
+          pauseBetween: const Duration(milliseconds: 2000),
+        ),
+        TextScroll(
+          musicProvider.currentlyPlayingTrack != null
+              ? '${musicProvider.currentlyPlayingAlbum?.title} ∙ ${musicProvider.currentlyPlayingAlbum?.artistName}'
+              : '',
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 14,
+          ),
+          mode: TextScrollMode.bouncing,
+          velocity: const Velocity(pixelsPerSecond: Offset(8, 0)),
+          pauseBetween: const Duration(milliseconds: 2000),
+        ),
+      ],
     );
   }
 
   Widget albumArt(MusicProvider musicProvider) {
-    return Container();
+    // TODO (16): Container
+    // TODO (17): Container.width = height = 42
+    // TODO (18): Container.borderRadius = 6
+    // TODO (19): Container.clipBehavior = antiAlias
+    // TODO (20): Container.child = If track is playing, musicProvider.currentlyPlayingAlbum.cover, else Icon(Icons.music_off)
+
+    return Container(
+      width: 42,
+      height: 42,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+      clipBehavior: Clip.antiAlias,
+      child: musicProvider.currentlyPlayingTrack != null
+          ? Image.asset(
+              musicProvider.currentlyPlayingAlbum?.cover ?? '',
+              fit: BoxFit.cover,
+            )
+          : const Icon(Icons.music_off),
+    );
   }
 }
