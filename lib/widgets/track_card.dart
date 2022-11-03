@@ -24,6 +24,45 @@ class TrackCard extends StatelessWidget {
     bool isTrackPlaying = currentlyPlayingTrack == track;
     bool isPlaying = musicProvider.isPlaying;
 
-    return const SizedBox();
+    // TODO (7): Row with track.number, spacing = 20, name (expanded), SpinKitWave when playing , duration
+    // TODO (8): SpinKit horizontal padding = 16, size = 12
+    // TODO (9): Duration = "ss" format and not "s" format
+
+    // TODO (10): (Material, InkWell).borderRadius of 6
+    // TODO (11): Material.color = isTrackPlaying ? album.color.withOpacity(0.5) : Colors.black
+    // TODO (12): Padding.all(16) around Row
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: Material(
+        borderRadius: BorderRadius.circular(6),
+        color: isTrackPlaying ? album.color.withOpacity(0.5) : Colors.black,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(6),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Text('${track.number}'),
+                const SizedBox(width: 20),
+                Expanded(child: Text(track.name)),
+                isTrackPlaying && isPlaying
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: SpinKitWave(
+                          color: Colors.white,
+                          size: 12.0,
+                        ),
+                      )
+                    : const SizedBox(),
+                Text(
+                    '${track.duration.minute}: ${DateFormat("ss").format(track.duration)}'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
