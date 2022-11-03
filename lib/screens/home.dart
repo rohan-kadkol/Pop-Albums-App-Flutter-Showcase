@@ -12,16 +12,11 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // TODO (1): Return albumSectionPages()
       body: albumSectionPages(context),
     );
   }
 
   Widget albumSectionPages(BuildContext context) {
-    // TODO (2): PageView with list of AlbumSection
-    // TODO (3): PageView.physics = BouncingScrollPhysics()
-    // TODO (4): onPageChanged = MusicProvider.selectedAlbum = albums[i]
-
     return PageView(
       physics: const BouncingScrollPhysics(),
       onPageChanged: (i) =>
