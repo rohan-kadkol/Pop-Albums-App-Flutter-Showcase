@@ -18,17 +18,8 @@ class AlbumSection extends StatelessWidget {
     // TODO (2): Add trackList to the Column
     // TODO (3): Space between header - trackList = 30
     // TODO (4): Space after trackList = 140
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          header(context),
-          const SizedBox(height: 30),
-          trackList(context),
-          const SizedBox(height: 140),
-        ],
-      ),
+    return SizedBox(
+      child: header(context),
     );
   }
 
